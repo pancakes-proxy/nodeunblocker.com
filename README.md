@@ -11,7 +11,7 @@ The original nodeunblocker.com is gone, but it's now easier than ever to deploy 
 
 ## Now with YouTube support (sort of)
 
-⚠️ YouTube appears to no be detecting and blocking this proxy, so you can not currently watch youtube videos through it. ⚠️
+⚠️ YouTube appears to no be detecting and blocking this proxy, so you can not currently watch youtube videos through it. ⚠
 
 I went ahead and activated the [youtube example](https://github.com/nfriedly/node-unblocker/blob/master/examples/youtube/youtube.js), it replaces youtube.com video pages with a custom page that just streams the video (~~but actually works~~). 
 
