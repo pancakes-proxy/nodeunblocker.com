@@ -1,10 +1,20 @@
+/***************
+ * node-unblocker: Web Proxy for evading firewalls and content filters,
+ * similar to CGIProxy or PHProxy
+ *
+ *
+ * This project is hosted on github:  https://github.com/nfriedly/nodeunblocker.com
+ *
+ * By Nathan Friedly - http://nfriedly.com
+ * Released under the terms of the Affero GPL v3
+ */
+
 var url = require('url');
 var querystring = require('querystring');
 var express = require('express');
 var Unblocker = require('unblocker');
 var Transform = require('stream').Transform;
-var youtube = require('unblocker/examples/youtube/youtube.js');
-var fs = require('fs');  // Require the file system module
+var youtube = require('unblocker/examples/youtube/youtube.js')
 
 var app = express();
 
@@ -43,25 +53,10 @@ function googleAnalyticsMiddleware(data) {
     }
 }
 
-// Custom middleware function to log requested URLs to a .txt file
-function logRequestMiddleware(data) {
-    if (data.contentType == 'text/html') {
-        const logMessage = `Requested URL: ${data.url}\n`;
-        fs.appendFile('url_logs.txt', logMessage, (err) => {
-            if (err) {
-                console.error('Failed to log URL:', err);
-            } else {
-                console.log(`Logged URL: ${data.url}`);
-            }
-        });
-    }
-}
-
 var unblockerConfig = {
     prefix: '/proxy/',
     requestMiddleware: [
-        youtube.processRequest,
-        logRequestMiddleware  // Add the logging middleware here
+        youtube.processRequest
     ],
     responseMiddleware: [
         googleAnalyticsMiddleware
