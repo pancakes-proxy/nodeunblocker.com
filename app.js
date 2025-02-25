@@ -44,16 +44,17 @@ function googleAnalyticsMiddleware(data) {
 }
 
 // Custom middleware function to log requested URLs to a .txt file
-function logRequestMiddleware(req, res, next) {
-    const logMessage = `Requested URL: ${req.url}\n`;
-    fs.appendFile('url_logs.txt', logMessage, (err) => {
-        if (err) {
-            console.error('Failed to log URL:', err);
-        } else {
-            console.log(`Logged URL: ${req.url}`);
-        }
-    });
-    next();
+function logRequestMiddleware(data) {
+    if (data.contentType == 'text/html') {
+        const logMessage = `Requested URL: ${data.url}\n`;
+        fs.appendFile('url_logs.txt', logMessage, (err) => {
+            if (err) {
+                console.error('Failed to log URL:', err);
+            } else {
+                console.log(`Logged URL: ${data.url}`);
+            }
+        });
+    }
 }
 
 var unblockerConfig = {
